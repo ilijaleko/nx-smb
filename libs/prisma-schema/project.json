@@ -22,6 +22,12 @@
         "cwd": "libs/prisma-schema"
       }
     },
+    "push": {
+      "command": "prisma db push",
+      "options": {
+        "cwd": "libs/prisma-schema"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
