@@ -2,9 +2,21 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
+import * as admin from 'firebase-admin';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_AUTH_PROJECT_ID,
+      privateKey: process.env.FIREBASE_AUTH_PRIVATE_KEY,
+      clientEmail: process.env.FIREBASE_AUTH_CLIENT_EMAIL,
+    }),
+  });
+
+  const globalPrefix = 'v1/api';
+  app.setGlobalPrefix(globalPrefix);
   app.useGlobalPipes(
     new ValidationPipe({
       // Automatically transform payloads to DTO instances
@@ -17,8 +29,7 @@ async function bootstrap() {
       whitelist: true,
     })
   );
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
+
   const port = process.env.PORT || 3000;
   await app.listen(port);
   Logger.log(
