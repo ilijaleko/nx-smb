@@ -1,0 +1,41 @@
+<main class="flex flex-col items-center">
+  <h1>Create shared post log entry</h1>
+  <form [formGroup]="sharedPostForm">
+    <section>
+      <label for="url">Post URL</label>
+      <input
+        pInputText
+        id="url"
+        formControlName="url"
+        placeholder="ex. https://www.instagram.com/..."
+      />
+    </section>
+    <section>
+      <label for="likeCOunt">Post like count</label>
+      <p-inputNumber
+        id="likeCOunt"
+        styleClass="w-full"
+        formControlName="likeCount"
+        locale="de-DE"
+      />
+    </section>
+    <section>
+      <label for="sharedAt">Date</label>
+      <p-calendar
+        id="sharedAt"
+        formControlName="sharedAt"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        [showButtonBar]="true"
+        dateFormat="dd.mm.yy"
+      ></p-calendar>
+    </section>
+    <section>
+      <p-button
+        label="Save"
+        (click)="onSubmit()"
+        [disabled]="!sharedPostForm.valid || !sharedPostForm.dirty"
+      ></p-button>
+    </section>
+  </form>
+</main>

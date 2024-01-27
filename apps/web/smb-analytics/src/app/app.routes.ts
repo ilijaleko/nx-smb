@@ -23,6 +23,14 @@ export const appRoutes: Route[] = [
     ...canActivate(() => redirectToLogin),
   },
   {
+    path: 'analytics',
+    loadChildren: () =>
+      import('./pages/analytics/analytics.routes').then(
+        (m) => m.ANALYTICS_ROUTES
+      ),
+    ...canActivate(() => redirectToLogin),
+  },
+  {
     path: 'auth',
     loadChildren: () =>
       import('./pages/auth/auth.routes').then((m) => m.AUTH_ROUTES),

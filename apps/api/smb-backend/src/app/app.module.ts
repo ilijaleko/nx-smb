@@ -9,9 +9,10 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FirebaseAuthMiddleware } from '../middleware/firebase-auth.middleware';
+import { SharedPostsModule } from './shared-posts/shared-posts.module';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [ConfigModule.forRoot({ cache: true }), SharedPostsModule],
   controllers: [AppController],
   providers: [AppService],
 })
