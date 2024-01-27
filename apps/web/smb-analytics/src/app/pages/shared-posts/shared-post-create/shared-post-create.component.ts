@@ -4,7 +4,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { SharedPostsActions } from '../../../../store/shared-posts/shared-posts.actions';
+import { SharedPostsActions } from '../../../store/shared-posts/shared-posts.actions';
 import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({

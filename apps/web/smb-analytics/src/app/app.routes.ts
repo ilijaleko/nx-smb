@@ -23,10 +23,10 @@ export const appRoutes: Route[] = [
     ...canActivate(() => redirectToLogin),
   },
   {
-    path: 'analytics',
+    path: 'shared-posts',
     loadChildren: () =>
-      import('./pages/analytics/analytics.routes').then(
-        (m) => m.ANALYTICS_ROUTES
+      import('./pages/shared-posts/shared-posts.routes').then(
+        (m) => m.SHARED_POSTS_ROUTES
       ),
     ...canActivate(() => redirectToLogin),
   },
