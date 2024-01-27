@@ -3,3 +3,11 @@
 @import 'tailwindcss/base' layer(tailwindcss);
 @import 'tailwindcss/components' layer(tailwindcss);
 @import 'tailwindcss/utilities' layer(tailwindcss);
+
+label {
+  @apply block font-semibold mb-2;
+}
+
+section {
+  @apply flex flex-col py-2 w-full;
+}

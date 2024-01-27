@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  ApplicationConfig,
+  importProvidersFrom,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { appRoutes } from './app.routes';
@@ -8,12 +12,15 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideStore } from '@ngrx/store';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from '../shared/interceptors/auth.interceptor';
+import { provideStoreProviders } from './store';
+import { AuthService } from '../shared/auth/auth.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(appRoutes),
     provideAnimations(),
     provideStore(),
+    provideStoreProviders(),
     importProvidersFrom(
       provideFirebaseApp(() =>
         initializeApp({
@@ -29,6 +36,13 @@ export const appConfig: ApplicationConfig = {
       ),
       provideAuth(() => getAuth())
     ),
+    // TODO: This is a workaround, improve in future
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => () => authService,
+      multi: true,
+      deps: [AuthService],
+    },
     provideHttpClient(withInterceptors([authInterceptor])),
   ],
 };
